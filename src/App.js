@@ -1,10 +1,15 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import Form from './components/Form';
 import Appointment from "./components/Appointment";
 
 function App() {
 
-  const [appointments, setAppointment] = useState([]);
+  let defaultAppointments = JSON.parse(localStorage.getItem('appointments'));
+  if(!defaultAppointments) {
+    defaultAppointments = [];
+  } 
+
+  const [appointments, setAppointment] = useState(defaultAppointments);
 
   // método para agregar nuevas citas al state
   const addAppointment = (newAppointment) => {
@@ -20,6 +25,19 @@ function App() {
     currentState.splice(index, 1);
     setAppointment(currentState);
   };
+
+  useEffect(
+    () => {
+      let defaultAppointments = JSON.parse(localStorage.getItem('appointments'));
+      if(defaultAppointments) {
+        localStorage.setItem('appointments', JSON.stringify(defaultAppointments));
+      } else {
+        localStorage.setItem('appointments', JSON.stringify([]));
+      }
+      
+      // el segundo parámetro es para indicar cuál componente dispara el useEffect
+    }, [appointments]
+  )
 
   // cargar condicionalmente un título
   const title = Object.keys(appointments).length === 0 ? 'There are not appointments yet' : 'List of appointments';

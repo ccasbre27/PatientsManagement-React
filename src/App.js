@@ -21,16 +21,21 @@ function App() {
     setAppointment(currentState);
   };
 
+  // cargar condicionalmente un título
+  const title = Object.keys(appointments).length === 0 ? 'There are not appointments yet' : 'List of appointments';
+
   return (
     <Fragment>
       <h1>Patients management</h1>
       <div className="container">
         <div className="row">
           <div className="one-half column">
+            <h2>Create appointment</h2>
             <Form
               addAppointment={addAppointment} />
           </div>
           <div className="one-half column">
+            <h2>{title}</h2>
             {appointments.map((currentAppointment, index) => (
               <Appointment 
                 key={index}

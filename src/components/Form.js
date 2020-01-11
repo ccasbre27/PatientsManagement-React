@@ -30,7 +30,6 @@ function Form({ addAppointment }) {
     return (
         <Fragment>
 
-            <h2>Create appointment</h2>
             <form
                 onSubmit={saveDate}>
 

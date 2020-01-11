@@ -2,11 +2,13 @@ import React, { Fragment, useState } from 'react';
 
 function Form({ addAppointment }) {
 
-    const [appointment, setAppointment] = useState({
+    const defaultState = {
         patientName: '',
         date: '',
         symptoms: ''
-    });
+    }
+
+    const [appointment, setAppointment] = useState(defaultState);
 
     const handleChange = (e) => {
         setAppointment({
@@ -22,6 +24,7 @@ function Form({ addAppointment }) {
         addAppointment(appointment);
 
         // reiniciar el state
+        setAppointment(defaultState);
     }
 
     return (
@@ -37,20 +40,23 @@ function Form({ addAppointment }) {
                     name="patientName"
                     className="u-full-width" 
                     placeholder="Patient name" 
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                    value={appointment.patientName} />
 
                 <label>Date</label>
                 <input 
                     type="date" 
                     className="u-full-width"
                     name="date"
-                    onChange={handleChange} />               
+                    onChange={handleChange}
+                    value={appointment.date} />               
 
                 <label>Symptoms</label>
                 <textarea 
                     className="u-full-width"
                     name="symptoms"
-                    onChange={handleChange} >
+                    onChange={handleChange}
+                    value={appointment.symptoms} >
 
                 </textarea>
 

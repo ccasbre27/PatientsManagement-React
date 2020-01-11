@@ -14,6 +14,13 @@ function App() {
     setAppointment(finalAppointments);
   };
 
+  // elimina las citas del state
+  const deleteAppointment = (index) => {
+    const currentState = [...appointments];
+    currentState.splice(index, 1);
+    setAppointment(currentState);
+  };
+
   return (
     <Fragment>
       <h1>Patients management</h1>
@@ -23,12 +30,13 @@ function App() {
             <Form
               addAppointment={addAppointment} />
           </div>
-          <div className="one-half-column">
+          <div className="one-half column">
             {appointments.map((currentAppointment, index) => (
               <Appointment 
                 key={index}
                 index={index}
-                appointment={currentAppointment} />
+                appointment={currentAppointment}
+                deleteAppointment={deleteAppointment} />
             ))}
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
-function Form(props) {
+function Form({ addAppointment }) {
 
     const [appointment, setAppointment] = useState({
         patientName: '',
@@ -15,11 +15,22 @@ function Form(props) {
         })
     }
 
+    const saveDate = (e) => {
+        e.preventDefault();
+
+        // pasar la cita al componente principal
+        addAppointment(appointment);
+
+        // reiniciar el state
+    }
+
     return (
         <Fragment>
-            <h2>Create appointment</h2>
 
-            <form>
+            <h2>Create appointment</h2>
+            <form
+                onSubmit={saveDate}>
+
                 <label>Name</label>
                 <input 
                     type="text" 
@@ -44,7 +55,9 @@ function Form(props) {
                 </textarea>
 
                 <button type="submit" className="button-primary u-full-width">Add</button>
+
             </form>
+
         </Fragment>
     );
 }
